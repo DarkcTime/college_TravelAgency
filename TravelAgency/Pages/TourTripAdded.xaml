@@ -1,0 +1,28 @@
+﻿<Page x:Class="TravelAgency.Pages.TourTripAdded"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TourTripAdded">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FFEA992D">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="40" Grid.Row="1">Путевка успешно оформлена</TextBlock>
+            <TextBlock Grid.Row="2">Запись можно найти в окне статистика</TextBlock>
+        </Grid>
+        <Button Grid.Row="1" Width="200" Click="Button_Click">Продолжить работу</Button>
+    </Grid>
+</Page>

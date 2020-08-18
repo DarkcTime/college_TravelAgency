@@ -1,0 +1,51 @@
+﻿<Window x:Class="TravelAgency.Windows.Auth"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelAgency"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="400" MinHeight="450" MaxHeight="500" MinWidth="400" MaxWidth="450" Icon="/TravelAgency;component/Resource/phoenix.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Background="#FFEA992D" OpacityMask="Black" Content="Войти"  Click="ClickBtnSing"></Button>
+            <Button Background="#FFEA992D" OpacityMask="Black" Grid.Column="1" Click="ClickBtnExit" Content="Закрыть"></Button>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/TravelAgency;component/Resource/phoenix.png"></Image>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       FontWeight="Bold" Grid.Column="1">Агенство "Феникс"</TextBlock>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock>Логин</TextBlock>
+            <TextBox Grid.Column="1" Name="TxbLogin"></TextBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock>Пароль</TextBlock>
+            <PasswordBox Grid.Column="1" x:Name="PsbPassword"></PasswordBox>
+        </Grid>
+    </Grid>
+</Window>

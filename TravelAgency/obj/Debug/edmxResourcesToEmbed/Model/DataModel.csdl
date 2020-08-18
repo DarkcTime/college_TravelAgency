@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TravelAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Airlane">
+    <Key>
+      <PropertyRef Name="IdAirlane" />
+    </Key>
+    <Property Name="IdAirlane" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TouristTrips" Relationship="Self.FK_TouristTrip_Airlanes" FromRole="Airlanes" ToRole="TouristTrip" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="IdClient" />
+    </Key>
+    <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NumberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NationalityId" Type="Int32" Nullable="false" />
+    <Property Name="DataPassport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TouristTrips" Relationship="Self.FK_TouristTrip_Clients" FromRole="Clients" ToRole="TouristTrip" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="IdCountry" />
+    </Key>
+    <Property Name="IdCountry" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Hotels" Relationship="Self.FK_Hotels_Countries" FromRole="Countries" ToRole="Hotels" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="IdHotel" />
+    </Key>
+    <Property Name="IdHotel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberOfStarsId" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <Property Name="PriceOneWeek" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Hotels_Countries" FromRole="Hotels" ToRole="Countries" />
+    <NavigationProperty Name="NumStar" Relationship="Self.FK_Hotels_NumStars" FromRole="Hotels" ToRole="NumStars" />
+    <NavigationProperty Name="HotelServices" Relationship="Self.FK_HotelService_Hotels" FromRole="Hotels" ToRole="HotelService" />
+    <NavigationProperty Name="TouristTrips" Relationship="Self.FK_TouristTrip_Hotels" FromRole="Hotels" ToRole="TouristTrip" />
+  </EntityType>
+  <EntityType Name="HotelService">
+    <Key>
+      <PropertyRef Name="IdHotSer" />
+    </Key>
+    <Property Name="IdHotSer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelId" Type="Int32" Nullable="false" />
+    <Property Name="ServiceId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK_HotelService_Hotels" FromRole="HotelService" ToRole="Hotels" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_HotelService_Service" FromRole="HotelService" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="NumStar">
+    <Key>
+      <PropertyRef Name="CountStars" />
+    </Key>
+    <Property Name="CountStars" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Hotels" Relationship="Self.FK_Hotels_NumStars" FromRole="NumStars" ToRole="Hotels" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="IdService" />
+    </Key>
+    <Property Name="IdService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Deskription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HotelServices" Relationship="Self.FK_HotelService_Service" FromRole="Service" ToRole="HotelService" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TimeTravel">
+    <Key>
+      <PropertyRef Name="NumberWeek" />
+    </Key>
+    <Property Name="NumberWeek" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TouristTrips" Relationship="Self.FK_TouristTrip_TimeTravel" FromRole="TimeTravel" ToRole="TouristTrip" />
+  </EntityType>
+  <EntityType Name="TouristTrip">
+    <Key>
+      <PropertyRef Name="IdTourTrip" />
+    </Key>
+    <Property Name="IdTourTrip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="AirlineId" Type="Int32" Nullable="false" />
+    <Property Name="TimeTravelId" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="HotelId" Type="Int32" Nullable="false" />
+    <Property Name="FullPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Airlane" Relationship="Self.FK_TouristTrip_Airlanes" FromRole="TouristTrip" ToRole="Airlanes" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_TouristTrip_Clients" FromRole="TouristTrip" ToRole="Clients" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK_TouristTrip_Hotels" FromRole="TouristTrip" ToRole="Hotels" />
+    <NavigationProperty Name="TimeTravel" Relationship="Self.FK_TouristTrip_TimeTravel" FromRole="TouristTrip" ToRole="TimeTravel" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TouristTrip_Airlanes">
+    <End Role="Airlanes" Type="Self.Airlane" Multiplicity="1" />
+    <End Role="TouristTrip" Type="Self.TouristTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airlanes">
+        <PropertyRef Name="IdAirlane" />
+      </Principal>
+      <Dependent Role="TouristTrip">
+        <PropertyRef Name="AirlineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TouristTrip_Clients">
+    <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+    <End Role="TouristTrip" Type="Self.TouristTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="TouristTrip">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_Countries">
+    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="IdCountry" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_NumStars">
+    <End Role="NumStars" Type="Self.NumStar" Multiplicity="1" />
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NumStars">
+        <PropertyRef Name="CountStars" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="NumberOfStarsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelService_Hotels">
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelService" Type="Self.HotelService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="IdHotel" />
+      </Principal>
+      <Dependent Role="HotelService">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TouristTrip_Hotels">
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="TouristTrip" Type="Self.TouristTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="IdHotel" />
+      </Principal>
+      <Dependent Role="TouristTrip">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelService_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="HotelService" Type="Self.HotelService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="IdService" />
+      </Principal>
+      <Dependent Role="HotelService">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TouristTrip_TimeTravel">
+    <End Role="TimeTravel" Type="Self.TimeTravel" Multiplicity="1" />
+    <End Role="TouristTrip" Type="Self.TouristTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimeTravel">
+        <PropertyRef Name="NumberWeek" />
+      </Principal>
+      <Dependent Role="TouristTrip">
+        <PropertyRef Name="TimeTravelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TravelAgencyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Airlanes" EntityType="Self.Airlane" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+    <EntitySet Name="HotelServices" EntityType="Self.HotelService" />
+    <EntitySet Name="NumStars" EntityType="Self.NumStar" />
+    <EntitySet Name="Services" EntityType="Self.Service" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TimeTravels" EntityType="Self.TimeTravel" />
+    <EntitySet Name="TouristTrips" EntityType="Self.TouristTrip" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_TouristTrip_Airlanes" Association="Self.FK_TouristTrip_Airlanes">
+      <End Role="Airlanes" EntitySet="Airlanes" />
+      <End Role="TouristTrip" EntitySet="TouristTrips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TouristTrip_Clients" Association="Self.FK_TouristTrip_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="TouristTrip" EntitySet="TouristTrips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_Countries" Association="Self.FK_Hotels_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_NumStars" Association="Self.FK_Hotels_NumStars">
+      <End Role="NumStars" EntitySet="NumStars" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelService_Hotels" Association="Self.FK_HotelService_Hotels">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="HotelService" EntitySet="HotelServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TouristTrip_Hotels" Association="Self.FK_TouristTrip_Hotels">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="TouristTrip" EntitySet="TouristTrips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelService_Service" Association="Self.FK_HotelService_Service">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="HotelService" EntitySet="HotelServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TouristTrip_TimeTravel" Association="Self.FK_TouristTrip_TimeTravel">
+      <End Role="TimeTravel" EntitySet="TimeTravels" />
+      <End Role="TouristTrip" EntitySet="TouristTrips" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
